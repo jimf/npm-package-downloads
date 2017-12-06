@@ -1,0 +1,28 @@
+{
+  "name": "npm-package-downloads",
+  "version": "0.1.0",
+  "description": "Script to view download stats for npm packages by a user",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jimf/npm-package-downloads"
+  },
+  "scripts": {
+    "lint": "standard",
+    "pretest": "npm run lint",
+    "test": "echo \"no tests specified\""
+  },
+  "bin": "bin/npm-package-downloads",
+  "keywords": [],
+  "author": "Jim Fitzpatrick",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jimf/npm-package-downloads/issues"
+  },
+  "homepage": "https://github.com/jimf/npm-package-downloads",
+  "dependencies": {
+    "download-stats": "^0.3.2",
+    "minimist": "^1.2.0",
+    "npm-user-packages": "^3.0.0",
+    "text-table": "^0.2.0"
+  }
+}

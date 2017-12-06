@@ -1,0 +1,45 @@
+#!/usr/bin/env node
+
+const parseOpts = require('minimist')
+const table = require('text-table')
+const pkg = require('../package.json')
+const getNpmUserDownloadStats = require('..')
+
+const opts = parseOpts(process.argv.slice(2), {
+  alias: {
+    help: 'h'
+  },
+  default: {
+    user: process.env.USER
+  }
+})
+
+if (opts.help) {
+  console.log([
+    'npm-package-downloads - view npm download stats for packages by a user',
+    '',
+    'Usage: npm-package-downloads [options...]',
+    '',
+    ' -h, --help      Display this help message and exit',
+    '     --user      npm user',
+    '     --version   Display version number and exit'
+  ].join('\n'))
+  process.exit(0)
+} else if (opts.version) {
+  console.log(pkg.version)
+  process.exit(0)
+}
+
+getNpmUserDownloadStats(opts.user)
+  .then(result => {
+    console.log(
+      table([
+        ['Package', 'D/ls last mo'],
+        ...result.map(p => [p.package, p.downloads.toLocaleString()])
+      ], { align: ['l', 'r'] })
+    )
+  })
+  .catch(err => {
+    console.log(err)
+    process.exit(1)
+  })
